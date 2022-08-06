@@ -1,25 +1,9 @@
-//Funciones
-
-
-/* function verificador(n1 = 0) {
-    while (isNaN(n1)) {
-        n1 = parseFloat(prompt("Ingrese porfavor una nota valida:"))
-    }
-    nota = n1
-} */
-
-function ingresarAlumno () {
+function ingresarAlumno (alum) {
     let nota = 0
     let total = 0
     let promedio = 0
     let contador = 0
     let cond = "si"
-    let alum = {
-        nombre:"",
-        apellido:"",
-        edad:0,
-        promedio:0
-    }
     alum.nombre = prompt("Ingrese Nombre del alumno:")
     alum.apellido = prompt("Ingrese Apellido del alumno:")
     alum.edad = parseInt(prompt("Ingrese edad del alumno:"))
@@ -36,29 +20,31 @@ function ingresarAlumno () {
     }
     promedio = total / contador
     alum.promedio = promedio
-    alumnos.push(alum)
 }
 
 
 //Variables
 const alumnos = []
 /* const alumnoAux = new Alumno() */
-
+const alumnoAux = {
+    nombre:"",
+    apellido:"",
+    edad:0,
+    promedio:0
+}
 let condicion = "si"
 
 //Main
-ingresarAlumno()
+ingresarAlumno(alumnoAux)
 while (condicion == "si") {
-    
+    alumnos.push(alumnoAux)
     condicion = prompt("Ingrese Si si quiere seguir agregando alumnos:").toLowerCase()
     if (condicion == "si"){
-        ingresarAlumno()
+        ingresarAlumno(alumnoAux)
     }
 }
 
 console.log(alumnos)
-
-
 
 
 
