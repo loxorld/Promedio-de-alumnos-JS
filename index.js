@@ -1,56 +1,43 @@
 //Variables
 const alumnos = []
-/* const alumnoAux = new Alumno() */
-let condicion = "si"
+const idForm = document.getElementById("idForm")
+const agregarNota = document.getElementById("agregarNota")
+const notasAux = []
+let total = 0
+class Alumno {
+    constructor(nombre, apellido, edad, notas) {
+        this.nombre = nombre
+        this.apelldio = apellido
+        this.edad = edad
+        this.notas = notas
+        this.promedio = 0
+    }
+}
+
 
 //Funciones
-function verificador(n1 = 0) {
-    while (isNaN(n1)) {
-        n1 = parseFloat(prompt("Ingrese porfavor una nota valida:"))
-    }
-    return n1
-}
+agregarNota.addEventListener("click", (ev) => {
+    ev.preventDefault()
+    notasAux.push(document.getElementById("nota").value)
 
-function ingresarAlumno () {
-    const alum = {
-        nombre:"",
-        apellido:"",
-        edad:0,
-        promedio:0
-    }
-    let nota = 0
-    let total = 0
-    let promedio = 0
-    let contador = 0
-    let cond = "si"
-    alum.nombre = prompt("Ingrese Nombre del alumno:")
-    alum.apellido = prompt("Ingrese Apellido del alumno:")
-    alum.edad = parseInt(prompt("Ingrese edad del alumno:"))
-    nota = parseFloat(prompt("Ingrese su nota:"))
-    nota = verificador (nota)  
-    console.log(nota) 
-    while (cond == "si"){
-        total += nota 
-        contador++
-        cond = prompt("Ingrese Si si quiere seguir agregando notas").toLowerCase()
-        if(cond == "si" ){
-            nota = parseFloat(prompt("Ingrese su nota:"))
-            nota = verificador (nota)
-        }
-    }
-    promedio = total / contador
-    alum.promedio = promedio
-    alumnos.push(alum)
-}
+})
+
+idForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const alumno = new Alumno(document.getElementById("nombre").value, document.getElementById("apellido").value, document.getElementById("edad").value, notasAux)
+    alumno.notas.forEach((nota) => { 
+        total += parseInt(nota)
+    })
+    alumno.promedio = total / alumno.notas.length
+    console.log(alumno.promedio)
+    alumnos.push(alumno)
+    idForm.reset()
+    total = 0 // vuelvo a poner el total en 0 para el proximo alumno
+    console.log(alumnos)
+    notasAux.splice(0, notasAux.length)  // vacio el array para el proximo alumno
+})
+
 
 
 //Main
 
-ingresarAlumno()
-while (condicion == "si") {
-    condicion = prompt("Ingrese Si si quiere seguir agregando alumnos:").toLowerCase()
-    if (condicion == "si"){
-        ingresarAlumno()
-    }
-}
-console.log(alumnos)
