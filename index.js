@@ -2,6 +2,8 @@
 const alumnos = []
 const idForm = document.getElementById("idForm")
 const agregarNota = document.getElementById("agregarNota")
+const botonAlumnos = document.getElementById("botonAlumnos")
+const divAlumnos = document.getElementById("divAlumnos")
 const notasAux = []
 let total = 0
 class Alumno {
@@ -35,6 +37,22 @@ idForm.addEventListener("submit", (e) => {
     total = 0 // vuelvo a poner el total en 0 para el proximo alumno
     console.log(alumnos)
     notasAux.splice(0, notasAux.length)  // vacio el array para el proximo alumno
+})
+
+botonAlumnos.addEventListener("click", () => {
+    divAlumnos.innerHTML = ""
+    alumnos.forEach((alumno, indice) => {
+        divAlumnos.innerHTML += `
+        <div class="card" id="alumno${indice}" style="width: 18rem;margin:3px;">
+        <div class="card-body">
+            <h5 class="card-title">Alumno ${alumno.nombre} ${alumno.apelldio}</h5>
+            <p class="card-text">Edad: ${alumno.edad}</p>
+            <p class="card-text">Notas: ${alumno.notas}</p>
+            <p class="card-text">Promedio:${alumno.promedio}</p>
+        </div>
+        </div>
+        `
+    })
 })
 
 
