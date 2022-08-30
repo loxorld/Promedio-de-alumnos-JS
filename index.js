@@ -18,6 +18,8 @@ class Alumno {
     }
 }
 
+/* alumnos =  JSON.parse(localStorage.getItem("alumnos")) ?? [] */
+
 if(localStorage.getItem("alumnos")) { //Verifico si ya existe o no informacion
     alumnos =  JSON.parse(localStorage.getItem("alumnos")) 
 } else {
@@ -25,6 +27,26 @@ if(localStorage.getItem("alumnos")) { //Verifico si ya existe o no informacion
 }   
 
 //Funciones
+function alertita (){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Alumno cargado.'
+        
+      })
+}
+
 agregarNota.addEventListener("click", (ev) => { //Listener para el boton agregar notas
     ev.preventDefault()
     notasAux.push(document.getElementById("nota").value)
@@ -43,6 +65,14 @@ idForm.addEventListener("submit", (e) => {
     if ((alumno.nombre != "") && (alumno.apelldio != "") && (alumno.edad != 0) && (alumno.promedio <= 10)) { // if que chequea que los datos ingresados sean coherentes
         alumnos.push(alumno)
         localStorage.setItem('alumnos', JSON.stringify(alumnos))
+        alertita() 
+        
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Datos Erroneos',
+            text: 'Ingrese todos los datos correctamente porfavor',
+          })
     }
     
     idForm.reset()
