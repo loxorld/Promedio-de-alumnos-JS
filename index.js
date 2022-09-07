@@ -1,4 +1,21 @@
+const divPokemon = document.getElementById("divPokemon")
+fetch(`https://pokeapi.co/api/v2/pokemon/4`)
+.then(response => response.json())
+.then((pokemon => {
+    divPokemon.innerHTML = `
+    <div class="card" id="${pokemon.id}" style="width: 18rem;margin:3px;">
+            <div class="card-body">
+                <h2 class="card-title">Pokemon ${pokemon.name}</h2>
+                <p class="card-text">Altura: ${pokemon.height}</p>
+                <p class="card-text">Peso: ${pokemon.weight}</p>
+            </div>
+        </div>
+    `
+}))
+
+
 //Variables
+/*  
 let alumnos = []
 const idForm = document.getElementById("idForm")
 const agregarNota = document.getElementById("agregarNota")
@@ -19,7 +36,7 @@ class Alumno {
 }
 
 /* alumnos =  JSON.parse(localStorage.getItem("alumnos")) ?? [] */
-
+/*  
 if(localStorage.getItem("alumnos")) { //Verifico si ya existe o no informacion
     alumnos =  JSON.parse(localStorage.getItem("alumnos")) 
 } else {
@@ -104,7 +121,7 @@ botonAlumnos.addEventListener("click", () => {  //Listener para mostrar los alum
             localStorage.setItem('alumnos', JSON.stringify(alumnos)) //Local storage
         })
     })  
-})
+}) */
 
 
 
